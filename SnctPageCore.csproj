@@ -5,10 +5,16 @@
     <AWSProjectType>Lambda</AWSProjectType>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Amazon.Lambda.AspNetCoreServer" Version="5.1.1" />
+    <PackageReference Include="Amazon.Lambda.AspNetCoreServer" Version="5.1.6" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="wwwroot\images" />
     <Folder Include="wwwroot\images\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\SnctJikanwari\SnctJikanwari.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <_ContentIncludedByDefault Remove="Pages\HelloWorld\Index.cshtml" />
   </ItemGroup>
 </Project>
