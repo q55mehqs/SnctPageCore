@@ -1,5 +1,6 @@
 ﻿@page
 @using System.Globalization
+@using SnctJikanwari.JikanwariContents.Jugyo
 @model IndexModel
 @{
     ViewData["Title"] = "Home page";
@@ -11,7 +12,7 @@
     <thead>
     <tr>
         <th>校時</th>
-        <th>@DateTime.Today.ToString("yyyy/MM/dd (ddd)", new CultureInfo("ja-JP")) 時間割</th>
+        <th>@Model.DayTitle</th>
         <th></th>
     </tr>
     </thead>
@@ -19,8 +20,24 @@
     @{
         foreach (var dayJugyo in Model.DayJugyos)
         {
+            if (dayJugyo is HenkoJugyo henko)
+            {
+                var bg = henko.HenkoStatus == "変更" ? "yellow" : "darkgray";
+
+                <tr style="background-color: @bg">
+                    <td>
+                        @dayJugyo.Time<br>@dayJugyo.TimeString
+                    </td>
+                    <td>@henko.ToShortString()</td>
+                    <td>@dayJugyo.Other</td>
+                </tr>
+                continue;
+            }
+
             <tr>
-                <td>@dayJugyo.Time<br>@dayJugyo.TimeString</td>
+                <td>
+                    @dayJugyo.Time<br>@dayJugyo.TimeString
+                </td>
                 <td>@dayJugyo.Subject</td>
                 <td>@dayJugyo.Other</td>
             </tr>
