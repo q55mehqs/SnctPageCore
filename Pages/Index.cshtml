@@ -1,12 +1,13 @@
 ﻿@page
 @using SnctJikanwari.JikanwariContents.Jugyo
+@using SnctJikanwari
 @model IndexModel
 @{
     ViewData["Title"] = "Home page";
 }
 
 <h2>仙台高専で生きるためのページ</h2>
-
+<h3>@Model.UserClass</h3>
 <table>
     <thead>
     <tr>
@@ -46,3 +47,29 @@
 </table>
 
 <h3>課題情報</h3>
+
+<table>
+    <thead>
+    <tr>
+        <th>締切日</th>
+        <th>科目名</th>
+        <th>課題情報</th>
+        <th>提出フォーム</th>
+    </tr>
+    </thead>
+    <tbody>
+    @{
+        var kadaiResponse = await Model.UserKadaiResponseTask;
+        foreach (var kadai in kadaiResponse.Items)
+        {
+            var deadline = kadai["DeadlineTime"].N.ToLocalDateTime();
+            <tr>
+                <td>@deadline.ToString("MM/dd HH:mm")</td>
+                <td>@kadai["Subject"].S</td>
+                <td>@kadai["Information"].S.Replace("\n", "<br>")</td>
+                <td>@string.Join(", ", kadai["Form"].SS)</td>
+            </tr>
+        }
+    }
+    </tbody>
+</table>
