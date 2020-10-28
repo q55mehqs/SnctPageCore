@@ -70,7 +70,7 @@
             <tr>
                 <td>@deadline.ToString("MM/dd HH:mm")</td>
                 <td>@kadai["Subject"].S</td>
-                <td>@kadai["Information"].S.Replace("\n", "<br>")</td>
+                <td>@kadai["Information"].S.Replace("\n", " ")</td>
                 <td>@string.Join(", ", kadai["Form"].SS)</td>
             </tr>
         }
